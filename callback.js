@@ -18,12 +18,12 @@ dobleDe(8, resultado => {
 
 
 
-const sigDelDoble = (x,done) =>{
-    siguiente (x,resulado =>{
-      dobleDe(resulado, i => {
-        done(i)
-      }) 
+const sigDelDoble = (x,done)=>{
+  dobleDe(x,next2 =>{
+    siguiente(next2,next3=>{
+      done(next3)
     })
+  })
 }
 
 sigDelDoble(8,resultado => {
@@ -32,3 +32,30 @@ sigDelDoble(8,resultado => {
 
 
 
+const dobleDelSiguiente = (x,next) =>{
+  siguiente (x,res =>{
+    dobleDe(res, i => {
+      next(i)
+    }) 
+  })
+}
+
+
+dobleDelSiguiente(8, resultado =>{
+  console.log('el doble del siguiente de 8 =>', resultado)
+})
+
+
+
+const cuadrupleDeOcho= (x,next) => {
+  dobleDe(x,i =>{
+    dobleDe(i,res =>{
+      next(res)
+    })
+  })
+
+}
+
+cuadrupleDeOcho(8,res=>{
+  console.log("cuadruple de 8 =>", res)
+})
